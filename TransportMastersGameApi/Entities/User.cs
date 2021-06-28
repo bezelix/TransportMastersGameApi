@@ -19,6 +19,7 @@ namespace TransportMastersGameApi.Entities
         public float AccountBalance { get; set; }
         public virtual List<Driver> Drivers { get; set; }
         public virtual List<Vehicle> Vehicles { get; set; }
+        public virtual List<Delivery> Deliveries { get; set; }
 
     }
 }

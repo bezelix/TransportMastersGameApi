@@ -15,7 +15,8 @@ namespace TransportMastersGameApi.Entities
         public DateTime ManufactureDate { get; set; }
         public float Payload { get; set; }
         public float Speed { get; set; }
-        public float Price { get; set; }
+        public float StartPrice { get; set; }
+        public int CarCondition { get; set; }
         public string LocalizationN { get; set; }
         public string LocalizationE { get; set; }
         public int DriverId { get; set; }

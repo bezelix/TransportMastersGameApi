@@ -55,7 +55,7 @@ namespace TransportMastersGameApi.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
+                    b.Property<float>("StartPrice")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -119,7 +119,7 @@ namespace TransportMastersGameApi.Migrations
                     b.ToTable("ModelNames");
                 });
 
-            modelBuilder.Entity("TransportMastersGameApi.Entities.Size", b =>
+            modelBuilder.Entity("TransportMastersGameApi.Entities.CargoSize", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,7 +204,7 @@ namespace TransportMastersGameApi.Migrations
                     b.Property<float>("Payload")
                         .HasColumnType("real");
 
-                    b.Property<float>("Price")
+                    b.Property<float>("StartPrice")
                         .HasColumnType("real");
 
                     b.Property<float>("Speed")

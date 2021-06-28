@@ -11,11 +11,14 @@ namespace TransportMastersGameApi.Entities
         private string _connectionString =
         "Server=(localdb)\\mssqllocaldb; Database=TransportMastersGame;Trusted_Connection=True;";
         public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<CargoSize> Sizes { get; set; }
         public DbSet<CargoType> CargoTypes { get; set; }
         public DbSet<CarManufacturer> CarManufacturers { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Destination> Destinations { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
         public DbSet<ModelName> ModelNames { get; set; }
-        public DbSet<Size> Sizes { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 

@@ -8,9 +8,6 @@
         public float Price { get; set; }
         public int DestinationId { get; set; }
         public virtual Destination Destination { get; set; }
-        public virtual Vehicle Vehicles { get; set; }
-
-
 
     }
 }
