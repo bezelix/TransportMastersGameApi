@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TransportMastersGameApi.Entities
 {
-    public class Vehicles
+    public class Vehicle
     {
         public int Id { get; set; }
         public string ModelNameId { get; set; }
@@ -18,6 +18,8 @@ namespace TransportMastersGameApi.Entities
         public float Price { get; set; }
         public string LocalizationN { get; set; }
         public string LocalizationE { get; set; }
+        public int DriverId { get; set; }
+        public virtual Driver Driver { get; set; }
         public int CargoId { get; set; }
         public virtual Cargo Cargo { get; set; }
     }
