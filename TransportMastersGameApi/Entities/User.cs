@@ -13,12 +13,12 @@ namespace TransportMastersGameApi.Entities
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string Nationality { get; set; }
-
         public string PasswordHash { get; set; }
-
         public int RoleId { get; set; }
-        //public virtual Role Role { get; set; }
-
+        public virtual Role Role { get; set; }
+        public float AccountBalance { get; set; }
+        public virtual List<Driver> Drivers { get; set; }
+        public virtual List<Vehicle> Vehicles { get; set; }
 
     }
 }
