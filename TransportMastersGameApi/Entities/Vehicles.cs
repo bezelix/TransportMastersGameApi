@@ -15,10 +15,10 @@ namespace TransportMastersGameApi.Entities
         public DateTime ManufactureDate { get; set; }
         public float Payload { get; set; }
         public float Speed { get; set; }
+        public float Price { get; set; }
         public string LocalizationN { get; set; }
         public string LocalizationE { get; set; }
         public int CargoId { get; set; }
         public virtual Cargo Cargo { get; set; }
-        public int MyProperty { get; set; }
     }
 }
