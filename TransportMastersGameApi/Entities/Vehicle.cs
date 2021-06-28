@@ -20,7 +20,6 @@ namespace TransportMastersGameApi.Entities
         public string LocalizationN { get; set; }
         public string LocalizationE { get; set; }
         public int DriverId { get; set; }
-        public virtual Driver Driver { get; set; }
         public int CargoId { get; set; }
         public virtual Cargo Cargo { get; set; }
     }
