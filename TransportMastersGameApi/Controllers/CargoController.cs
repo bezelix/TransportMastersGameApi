@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransportMastersGameApi.Services;
 
 namespace TransportMastersGameApi.Controllers
 {
@@ -10,6 +11,12 @@ namespace TransportMastersGameApi.Controllers
     [ApiController]
     public class CargoController : ControllerBase
     {
+        private CargoService _cargoService;
+
+        public CargoController(CargoService cargoService)
+        {
+            _cargoService = cargoService;
+        }
 
     }
 }

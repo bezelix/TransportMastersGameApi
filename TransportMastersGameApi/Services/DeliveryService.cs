@@ -42,6 +42,8 @@ namespace TransportMastersGameApi.Services
             delivery.UserId = userId;
             delivery.StartTime = DateTime.Now;
 
+
+
             _dbContext.Deliveries.Add(delivery);
             _dbContext.SaveChanges();                                  
             return delivery.Id;

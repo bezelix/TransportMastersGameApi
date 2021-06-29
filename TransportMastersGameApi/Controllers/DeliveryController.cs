@@ -20,7 +20,7 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromRoute] int userId, [FromBody] CreateDeliveryDto dto) //nazwa restaurantId musi odpowiadać nazwie w ścieżce w route [Route("api/{restaurantId}/dish")] bo inaczej jej nie rozpozna
+        public ActionResult Post([FromRoute] int userId, [FromBody] CreateDeliveryDto dto) 
         {
             var newDelivery = _deliveryService.Create(userId, dto);
             return Created($"/api/user/{userId}/delivery/{newDelivery}", null);
