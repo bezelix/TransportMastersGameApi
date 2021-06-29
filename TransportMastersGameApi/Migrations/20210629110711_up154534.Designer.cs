@@ -120,7 +120,7 @@ namespace TransportMastersGameApi.Migrations
                     b.Property<float>("RouteLength")
                         .HasColumnType("real");
 
-                    b.Property<int>("StartDestinationId")
+                    b.Property<int>("StartLocationId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UserId")

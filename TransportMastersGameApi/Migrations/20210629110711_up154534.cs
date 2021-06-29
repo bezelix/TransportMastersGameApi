@@ -18,7 +18,7 @@ namespace TransportMastersGameApi.Migrations
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
-                name: "StartDestinationId",
+                name: "StartLocationId",
                 table: "Deliveries",
                 type: "int",
                 nullable: false,
@@ -52,7 +52,7 @@ namespace TransportMastersGameApi.Migrations
                 table: "Deliveries");
 
             migrationBuilder.DropColumn(
-                name: "StartDestinationId",
+                name: "StartLocationId",
                 table: "Deliveries");
 
             migrationBuilder.AlterColumn<int>(
