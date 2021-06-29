@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransportMastersGameApi.Entities;
 
 namespace TransportMastersGameApi.Migrations
 {
     [DbContext(typeof(TransportMastersGameDbContext))]
-    partial class TransportMastersGameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210629231532_new2")]
+    partial class new2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

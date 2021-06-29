@@ -10,8 +10,8 @@ namespace TransportMastersGameApi.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public float Price { get; set; }
-        public int StartLocationId { get; set; }
-        public int DestinationId { get; set; }
+        public int StartLocation { get; set; }
+        public int Destination { get; set; }
         public bool Available { get; set; }
     }
 }
