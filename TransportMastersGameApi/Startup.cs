@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransportMastersGameApi.Entities;
 
 namespace TransportMastersGameApi
 {
@@ -27,6 +28,7 @@ namespace TransportMastersGameApi
         {
 
             services.AddControllers();
+            services.AddDbContext<TransportMastersGameDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
