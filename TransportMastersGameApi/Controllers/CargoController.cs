@@ -10,5 +10,6 @@ namespace TransportMastersGameApi.Controllers
     [ApiController]
     public class CargoController : ControllerBase
     {
+
     }
 }

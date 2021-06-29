@@ -22,7 +22,8 @@ namespace TransportMastersGameApi
             CreateMap<Vehicle, VehicleDto>();
 
             //create
-            CreateMap<CreateCargoDto, CargoDto>();
+            CreateMap<CreateDeliveryDto, Delivery>();
+            CreateMap<CreateCargoDto, Cargo>();
 
         }
     }

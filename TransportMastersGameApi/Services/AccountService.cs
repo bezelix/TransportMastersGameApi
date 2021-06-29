@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using TransportMastersGameApi.Entities;
 using TransportMastersGameApi.Models;
-using FirstStepsDotNet.Models;
 using Microsoft.EntityFrameworkCore;
 using FirstStepsDotNet.Exceptions;
 using Microsoft.Extensions.Logging;
