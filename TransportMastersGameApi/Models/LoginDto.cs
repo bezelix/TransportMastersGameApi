@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FirstStepsDotNet.Models
+namespace TransportMastersGameApi.Models
 {
     public class LoginDto
     {

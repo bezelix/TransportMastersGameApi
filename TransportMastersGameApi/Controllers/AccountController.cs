@@ -26,7 +26,13 @@ namespace TransportMastersGameApi.Controllers
             _AccountService.RegisterUser(dto);
             return Ok();
         }
+        [HttpPost("login")]
 
+        public ActionResult Login([FromBody] LoginDto dto)
+        {
+            string token = _AccountService.GenerateJwt(dto);
+            return Ok(token);
+        }
 
     }
 }
