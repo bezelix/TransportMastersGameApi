@@ -7,5 +7,6 @@ namespace TransportMastersGameApi.Services
 {
     public interface IAccountService
     {
+
     }
 }
