@@ -42,10 +42,9 @@ namespace TransportMastersGameApi.Services
             var delivery = _mapper.Map<Delivery>(dto);
             delivery.UserId = userId;
             delivery.StartTime = DateTime.Now;
-            _ICargoService.Delete(dto.CargoId);
-
             _dbContext.Deliveries.Add(delivery);
-            _dbContext.SaveChanges();                                  
+            _dbContext.SaveChanges();
+            _ICargoService.ChangeAvailable(dto.CargoId);
             return delivery.Id;
         }
 

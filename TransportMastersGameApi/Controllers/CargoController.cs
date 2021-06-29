@@ -44,5 +44,10 @@ namespace TransportMastersGameApi.Controllers
             _cargoService.Delete(cargoId);
             return NoContent();
         }
+        public ActionResult<CargoDto> ChangeAvailable([FromRoute] int cargoId)
+        {
+            _cargoService.ChangeAvailable(cargoId);
+            return NoContent();
+        }
     }
 }

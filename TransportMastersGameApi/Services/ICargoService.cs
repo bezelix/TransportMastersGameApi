@@ -12,5 +12,6 @@ namespace TransportMastersGameApi.Services
         CargoDto GetById(int cargoId);
         object GetAll();
         void Delete(int cargoId);
+        void ChangeAvailable(int cargoId);
     }
 }

@@ -22,10 +22,28 @@ namespace TransportMastersGameApi.Services
             _mapper = mapper;
             _logger = logger;
         }
+
+        public void ChangeAvailable(int cargoId)
+        {
+            var cargo = _dbContext
+                                        .Cargos
+                                        .FirstOrDefault(r => r.Id == cargoId);
+            if (cargo is null)
+            {
+                throw new NotFoundException("Cargo not found");
+            }
+            else
+            {
+                cargo.Available = false;
+            }
+            _dbContext.Cargos.Update(cargo);
+            _dbContext.SaveChanges();
+        }
+
         public object Create(CreateCargoDto dto)
         {
             var cargo = _mapper.Map<Cargo>(dto);
-            
+
             _dbContext.Cargos.Add(cargo);
             _dbContext.SaveChanges();
             return cargo.Id;
@@ -34,13 +52,13 @@ namespace TransportMastersGameApi.Services
         public void Delete(int cargoId)
         {
             //_logger.LogWarning($"Dish with Id: {id} DELETE action invoked");//loger 
-            var dish = _dbContext
+            var cargo = _dbContext
                             .Cargos
-                            .FirstOrDefault(r => r.Id == cargoId);   
-            if (dish is null)
-                throw new NotFoundException("Cargo not found");    
+                            .FirstOrDefault(r => r.Id == cargoId);
+            if (cargo is null)
+                throw new NotFoundException("Cargo not found");
 
-            _dbContext.Cargos.Remove(dish);
+            _dbContext.Cargos.Remove(cargo);
             _dbContext.SaveChanges();
         }
 
@@ -49,7 +67,7 @@ namespace TransportMastersGameApi.Services
             var cargos = _dbContext
                             .Cargos;
 
-            var cargosDtos = _mapper.Map<List<CargoDto>>(cargos); 
+            var cargosDtos = _mapper.Map<List<CargoDto>>(cargos);
             return cargosDtos;
         }
 
@@ -57,7 +75,7 @@ namespace TransportMastersGameApi.Services
         {
             var cargo = _dbContext
                             .Deliveries
-                            .FirstOrDefault(d => d.Id == cargoId); 
+                            .FirstOrDefault(d => d.Id == cargoId);
 
             if (cargo is null || cargo.UserId != cargoId)
             {
