@@ -49,6 +49,11 @@ namespace TransportMastersGameApi.Services
             return cargo.Id;
         }
 
+        public void CreateRandomCargo(CreateDestinationDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(int cargoId)
         {
             //_logger.LogWarning($"Dish with Id: {id} DELETE action invoked");//loger 

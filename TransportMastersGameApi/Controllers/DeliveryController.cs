@@ -46,7 +46,7 @@ namespace TransportMastersGameApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{deliveryId}")]
         public ActionResult<DeliveryDto> Delete([FromRoute] int deliveryId)
         {
             _deliveryService.Delete(deliveryId);

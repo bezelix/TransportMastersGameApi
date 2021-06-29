@@ -13,5 +13,6 @@ namespace TransportMastersGameApi.Services
         object GetAll();
         void Delete(int cargoId);
         void ChangeAvailable(int cargoId);
+        void CreateRandomCargo(CreateDestinationDto dto);
     }
 }

@@ -39,6 +39,7 @@ namespace TransportMastersGameApi.Controllers
             var cargo = _cargoService.GetAll();
             return Ok(cargo);
         }
+        [HttpDelete("{cargoId}")]
         public ActionResult<CargoDto> Delete([FromRoute] int cargoId)
         {
             _cargoService.Delete(cargoId);
