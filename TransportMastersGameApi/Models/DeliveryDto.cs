@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TransportMastersGameApi.Entities
+namespace TransportMastersGameApi.Models
 {
-    public class Delivery
+    public class DeliveryDto
     {
-        public int Id { get; set; }
         public int CargoId { get; set; }
         public int DriverId { get; set; }
         public int VehicleId { get; set; }
-        public int StartDestinationId { get; set; }
-        public int DestinationId { get; set; }
         public float RouteLength { get; set; }
     }
 }

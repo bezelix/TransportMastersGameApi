@@ -14,6 +14,16 @@ namespace TransportMastersGameApi
         {
             CreateMap<RegisterUserDto, User>()
                .ForMember(r => r.PasswordHash, c => c.MapFrom(dto => dto.Password));
+
+
+            CreateMap<Cargo, CargoDto>();
+            CreateMap<Delivery, DeliveryDto>();
+            CreateMap<Destination, DestinationDto>();
+            CreateMap<Vehicle, VehicleDto>();
+
+            //create
+            CreateMap<CreateCargoDto, CargoDto>();
+
         }
     }
 }
