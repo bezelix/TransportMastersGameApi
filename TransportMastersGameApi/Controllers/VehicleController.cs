@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace TransportMastersGameApi.Controllers
 {
-    public class VehicleController
+    [Route("api/vehicle")]
+    [ApiController]
+    public class VehicleController : ControllerBase
     {
     }
 }

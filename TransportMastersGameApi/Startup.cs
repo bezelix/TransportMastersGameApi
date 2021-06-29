@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TransportMastersGameApi.Entities;
+using TransportMastersGameApi.Services;
 
 namespace TransportMastersGameApi
 {
@@ -26,9 +27,17 @@ namespace TransportMastersGameApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
 
             services.AddControllers();
             services.AddDbContext<TransportMastersGameDbContext>();
+
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ICargoService, CargoService>();
+            services.AddScoped<IDeliveryService, DeliveryService>();
+            services.AddScoped<IDestinationService, DestinationService>();
+            services.AddScoped<IDriverService, DriverService>();
+            services.AddScoped<IVehicleService, VehicleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
