@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransportMastersGameApi.Controllers;
 using TransportMastersGameApi.Entities;
 using TransportMastersGameApi.Models;
 
@@ -13,12 +14,14 @@ namespace TransportMastersGameApi.Services
 {
     public class DeliveryService : IDeliveryService
     {
+        private readonly ICargoService _ICargoService;
         private readonly TransportMastersGameDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<DeliveryService> _logger;
 
-        public DeliveryService(TransportMastersGameDbContext dbContext, IMapper mapper, ILogger<DeliveryService> logger)
+        public DeliveryService(TransportMastersGameDbContext dbContext, IMapper mapper, ILogger<DeliveryService> logger, ICargoService cargoController)
         {
+            _ICargoService = cargoController;
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
@@ -36,20 +39,17 @@ namespace TransportMastersGameApi.Services
 
         public object Create(int userId, CreateDeliveryDto dto)
         {
-            var restaurant = GetUserById(userId);
-
             var delivery = _mapper.Map<Delivery>(dto);
             delivery.UserId = userId;
             delivery.StartTime = DateTime.Now;
-
-
+            _ICargoService.Delete(dto.CargoId);
 
             _dbContext.Deliveries.Add(delivery);
             _dbContext.SaveChanges();                                  
             return delivery.Id;
         }
 
-        public object GetAll(int userId)
+        public object GetAllUserDelivery(int userId)
         {
             var users = GetUserById(userId);
             var deliveriesDtos = _mapper.Map<List<DeliveryDto>>(users.Deliveries);   // mapuje liste dań dla restauracji 

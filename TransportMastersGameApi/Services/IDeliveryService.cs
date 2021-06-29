@@ -10,7 +10,7 @@ namespace TransportMastersGameApi.Services
     {
         object Create(int userId, CreateDeliveryDto dto);
         DeliveryDto GetById(int userId, int deliveryId);
-        object GetAll(int userId);
+        object GetAllUserDelivery(int userId);
         void DeleteAll(int userId);
         void Delete(int deliveryId);
     }

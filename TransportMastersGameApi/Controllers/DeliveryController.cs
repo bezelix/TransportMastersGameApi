@@ -36,7 +36,7 @@ namespace TransportMastersGameApi.Controllers
         [HttpGet]
         public ActionResult<DeliveryDto> GetAll([FromRoute] int userId)
         {
-            var delivery = _deliveryService.GetAll(userId);
+            var delivery = _deliveryService.GetAllUserDelivery(userId);
             return Ok(delivery);
         }
         [HttpDelete]
