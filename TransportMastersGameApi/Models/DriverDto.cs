@@ -1,19 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TransportMastersGameApi.Entities
+namespace TransportMastersGameApi.Models
 {
-    public class Driver
+    public class DriverDto
     {
-        public int Id { get; set; }
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Level { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string Nationality { get; set; }
-        public int VehicleId { get; set; }
-        public virtual Vehicle Vehicle { get; set; }
-        public float HoursAtWork { get; set; }
         public float MaxHoursAtWork { get; set; }
         public float Payment { get; set; }
     }

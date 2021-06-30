@@ -29,21 +29,21 @@ namespace TransportMastersGameApi.Controllers
 
         [HttpGet("{vehicleId}")]
 
-        public ActionResult<DeliveryDto> Get([FromRoute] int vehicleId)
+        public ActionResult<VehicleDto> Get([FromRoute] int vehicleId)
         {
             VehicleDto vehicle = _VehicleService.GetById(vehicleId);
             return Ok(vehicle);
         }
 
         [HttpGet]
-        public ActionResult<DeliveryDto> GetAll()
+        public ActionResult<VehicleDto> GetAll()
         {
             var vehicle = _VehicleService.GetAllVehicle();
             return Ok(vehicle);
         }
 
         [HttpDelete("{vehicleId}")]
-        public ActionResult<DeliveryDto> Delete([FromRoute] int vehicleId)
+        public ActionResult<VehicleDto> Delete([FromRoute] int vehicleId)
         {
             _VehicleService.Delete(vehicleId);
             return NoContent();

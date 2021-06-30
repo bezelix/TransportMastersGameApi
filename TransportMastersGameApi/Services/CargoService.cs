@@ -43,7 +43,6 @@ namespace TransportMastersGameApi.Services
         public object Create(CreateCargoDto dto)
         {
             var cargo = _mapper.Map<Cargo>(dto);
-
             _dbContext.Cargos.Add(cargo);
             _dbContext.SaveChanges();
             return cargo.Id;
