@@ -22,6 +22,7 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult Post([FromBody] CreateDriverDto dto)
         {
             var newdriver = _driverService.Create(dto);
@@ -45,6 +46,7 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpDelete("{driverId}")]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult<DriverDto> Delete([FromRoute] int driverId)
         {
             _driverService.Delete(driverId);

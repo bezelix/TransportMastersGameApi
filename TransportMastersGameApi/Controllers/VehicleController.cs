@@ -45,6 +45,7 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpDelete("{vehicleId}")]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult<VehicleDto> Delete([FromRoute] int vehicleId)
         {
             _VehicleService.Delete(vehicleId);

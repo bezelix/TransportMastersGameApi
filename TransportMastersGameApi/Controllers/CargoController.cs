@@ -22,6 +22,7 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult Post([FromBody] CreateCargoDto dto)
         {
             var newDelivery = _cargoService.Create(dto);
@@ -42,6 +43,7 @@ namespace TransportMastersGameApi.Controllers
             return Ok(cargo);
         }
         [HttpDelete("{cargoId}")]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult<CargoDto> Delete([FromRoute] int cargoId)
         {
             _cargoService.Delete(cargoId);

@@ -41,14 +41,17 @@ namespace TransportMastersGameApi.Controllers
             var delivery = _deliveryService.GetAllUserDelivery(userId);
             return Ok(delivery);
         }
+
+       
         [HttpDelete]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult<DeliveryDto> DeleteAll([FromRoute] int userId)
         {
             _deliveryService.DeleteAll(userId);
             return NoContent();
         }
-
         [HttpDelete("{deliveryId}")]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult<DeliveryDto> Delete([FromRoute] int deliveryId)
         {
             _deliveryService.Delete(deliveryId);

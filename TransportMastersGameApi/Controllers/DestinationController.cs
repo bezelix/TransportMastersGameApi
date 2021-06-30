@@ -22,6 +22,7 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult Post([FromBody] CreateDestinationDto dto)
         {
             var newDestination = _IDestinationService.Create(dto);
@@ -45,6 +46,7 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpDelete("{destinationId}")]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult<DestinationDto> Delete([FromRoute] int destinationId)
         {
             _IDestinationService.Delete(destinationId);
