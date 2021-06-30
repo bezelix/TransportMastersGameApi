@@ -8,7 +8,7 @@ namespace TransportMastersGameApi.Services
 {
     public interface IDeliveryService
     {
-        object Create(int userId, CreateDeliveryDto dto);
+        object Create(CreateDeliveryDto dto);
         DeliveryDto GetById(int userId, int deliveryId);
         object GetAllUserDelivery(int userId);
         void DeleteAll(int userId);

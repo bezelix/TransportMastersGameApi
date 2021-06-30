@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TransportMastersGameApi.Models;
 using TransportMastersGameApi.Services;
@@ -22,9 +23,10 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromRoute] int userId, [FromBody] CreateDeliveryDto dto) 
+        public ActionResult Post([FromBody] CreateDeliveryDto dto) 
         {
-            var newDelivery = _deliveryService.Create(userId, dto);
+            var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            var newDelivery = _deliveryService.Create(dto);
             return Created($"/api/user/{userId}/delivery/{newDelivery}", null);
         }
 

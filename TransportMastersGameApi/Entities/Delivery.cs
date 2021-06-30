@@ -8,7 +8,9 @@ namespace TransportMastersGameApi.Entities
     public class Delivery
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public int? CreatedByUser { get; set; }
+        public virtual User CreatedBy { get; set; }
+        public int? UserId { get; set; }
         public int CargoId { get; set; }
         public int DriverId { get; set; }
         public int VehicleId { get; set; }

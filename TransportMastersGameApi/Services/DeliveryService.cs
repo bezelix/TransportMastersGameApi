@@ -18,13 +18,15 @@ namespace TransportMastersGameApi.Services
         private readonly TransportMastersGameDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<DeliveryService> _logger;
+        private readonly IUserContextService _userContextService;
 
-        public DeliveryService(TransportMastersGameDbContext dbContext, IMapper mapper, ILogger<DeliveryService> logger, ICargoService cargoController)
+        public DeliveryService(TransportMastersGameDbContext dbContext, IMapper mapper, ILogger<DeliveryService> logger, ICargoService cargoController, IUserContextService userContextService)
         {
             _ICargoService = cargoController;
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _userContextService = userContextService;
         }
         private User GetUserById(int userId)
         {
@@ -37,10 +39,12 @@ namespace TransportMastersGameApi.Services
             return user;
         }
 
-        public object Create(int userId, CreateDeliveryDto dto)
+        public object Create(CreateDeliveryDto dto)
         {
+
             var delivery = _mapper.Map<Delivery>(dto);
-            delivery.UserId = userId;
+            delivery.UserId = _userContextService.GetUserId;
+            delivery.CreatedByUser = _userContextService.GetUserId;
             delivery.StartTime = DateTime.Now;
             _dbContext.Deliveries.Add(delivery);
             _dbContext.SaveChanges();

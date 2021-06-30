@@ -22,6 +22,8 @@ using TransportMastersGameApi.Models;
 using FluentValidation;
 using FirstStepsDotNet.Models.Validators;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
+using TransportMastersGameApi.Authorization;
 
 namespace TransportMastersGameApi
 {
@@ -58,12 +60,14 @@ namespace TransportMastersGameApi
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
                 };
             });
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
 
             services.AddControllers().AddFluentValidation();
             services.AddDbContext<TransportMastersGameDbContext>();
             services.AddAutoMapper(this.GetType().Assembly);
 
             //Services
+            services.AddScoped<IUserContextService, UserContextService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICargoService, CargoService>();
             services.AddScoped<IDeliveryService, DeliveryService>();
@@ -77,6 +81,7 @@ namespace TransportMastersGameApi
 
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddScoped<IValidator<RegisterUserDto>, RegisterUserValidator>();
+            services.AddHttpContextAccessor();
             services.AddSwaggerGen();
             //services.AddSwaggerGen(c =>
             //{
