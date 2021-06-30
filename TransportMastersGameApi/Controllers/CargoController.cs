@@ -42,6 +42,7 @@ namespace TransportMastersGameApi.Controllers
             var cargo = _cargoService.GetAll();
             return Ok(cargo);
         }
+
         [HttpDelete("{cargoId}")]
         [Authorize(Roles = "Admin,Manager")]
         public ActionResult<CargoDto> Delete([FromRoute] int cargoId)
