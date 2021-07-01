@@ -39,6 +39,8 @@ namespace TransportMastersGameApi.Services
             var user = new User()
             {
                 Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
                 DateOfBirth = dto.DateOfBirth,
                 Nationality = dto.Nationality,
                 RoleId = 1,
@@ -92,7 +94,16 @@ namespace TransportMastersGameApi.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
             return tokenHandler.WriteToken(token);
+        }
 
+        public string AddRole(string Role)
+        {
+            Role _role = new Role();
+            _role.Name = Role;
+
+            _dbContext.Roles.Add(_role);
+            _dbContext.SaveChanges();
+            return Role;
         }
     }
 }

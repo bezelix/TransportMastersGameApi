@@ -33,6 +33,13 @@ namespace TransportMastersGameApi.Controllers
             string token = _AccountService.GenerateJwt(dto);
             return Ok(token);
         }
+        [HttpPost("role")]
+
+        public ActionResult AddRole([FromRoute] string role)
+        {
+            _AccountService.AddRole(role);
+            return Ok();
+        }
 
     }
 }
