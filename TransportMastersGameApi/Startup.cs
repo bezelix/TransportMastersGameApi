@@ -24,6 +24,7 @@ using FirstStepsDotNet.Models.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using TransportMastersGameApi.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace TransportMastersGameApi
 {
@@ -63,10 +64,12 @@ namespace TransportMastersGameApi
             services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
 
             services.AddControllers().AddFluentValidation();
-            services.AddDbContext<TransportMastersGameDbContext>();
+            services.AddDbContext<TransportMastersGameDbContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("TransportMastersGameDBConnection")));
             services.AddAutoMapper(this.GetType().Assembly);
 
             //Services
+            services.AddScoped<ApiSeeder>();
             services.AddScoped<IUserContextService, UserContextService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICargoService, CargoService>();
@@ -90,8 +93,9 @@ namespace TransportMastersGameApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApiSeeder seeder)
         {
+            seeder.Seed();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

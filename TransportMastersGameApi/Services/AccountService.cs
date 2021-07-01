@@ -41,7 +41,8 @@ namespace TransportMastersGameApi.Services
                 Email = dto.Email,
                 DateOfBirth = dto.DateOfBirth,
                 Nationality = dto.Nationality,
-                RoleId = dto.RoleId
+                RoleId = 1,
+                AccountBalance = 10000
             };
 
             var hashedPassword = _passwordHasher.HashPassword(user, dto.Password);

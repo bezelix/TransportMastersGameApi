@@ -8,8 +8,10 @@ namespace TransportMastersGameApi.Entities
 {
     public class TransportMastersGameDbContext : DbContext 
     {
-        private string _connectionString =
-        "Server=(localdb)\\mssqllocaldb; Database=TransportMastersGame;Trusted_Connection=True;";
+        public TransportMastersGameDbContext(DbContextOptions<TransportMastersGameDbContext> options) : base(options)
+        {
+
+        }
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<CargoSize> Sizes { get; set; }
         public DbSet<CargoType> CargoTypes { get; set; }
@@ -27,16 +29,6 @@ namespace TransportMastersGameApi.Entities
             modelBuilder.Entity<User>()
                 .Property(c => c.Email)
                 .IsRequired();
-            modelBuilder.Entity<User>()
-               .Property(c => c.FirstName)
-               .IsRequired();
-            modelBuilder.Entity<User>()
-               .Property(c => c.LastName)
-               .IsRequired();
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TransportMastersGameApi.Controllers
 {
     [Route("api/driver")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DriverController : ControllerBase
     {
         private IDriverService _driverService;
@@ -22,7 +22,7 @@ namespace TransportMastersGameApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin,Manager")]
+        //[Authorize(Roles = "Admin,Manager")]
         public ActionResult Post([FromBody] CreateDriverDto dto)
         {
             var newdriver = _driverService.Create(dto);
