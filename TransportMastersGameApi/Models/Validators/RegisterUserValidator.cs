@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TransportMastersGameApi.Models;
 
-namespace FirstStepsDotNet.Models.Validators
+namespace TransportMastersGameApi.Models.Validators
 {
     //klasa odpowiadająca za walidację danych zamiast [atrybutów] w modelACH DANYCH     
     public class RegisterUserValidator : AbstractValidator<RegisterUserDto>

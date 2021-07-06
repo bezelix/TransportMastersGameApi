@@ -14,7 +14,7 @@ namespace TransportMastersGameApi.Entities
         public DateTime? DateOfBirth { get; set; }
         public string Nationality { get; set; }
         public string PasswordHash { get; set; }
-        public int RoleId { get; set; } 
+        public int RoleNumber { get; set; } 
         public virtual Role Role { get; set; }
         public float? AccountBalance { get; set; }
         public virtual List<Driver> Drivers { get; set; }

@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TransportMastersGameApi.Entities
+namespace TransportMastersGameApi.Models
 {
-    public class Destination
+    public class LocationDataDto
     {
-        public int Id { get; set; }
         public int State { get; set; }
         public int Country { get; set; }
         public int Continent { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public virtual  List<Cargo> Cargos { get; set; }
     }
 }

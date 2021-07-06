@@ -43,7 +43,7 @@ namespace TransportMastersGameApi.Services
                 LastName = dto.LastName,
                 DateOfBirth = dto.DateOfBirth,
                 Nationality = dto.Nationality,
-                RoleId = 1,
+                RoleNumber = 1,
                 AccountBalance = 10000
             };
 

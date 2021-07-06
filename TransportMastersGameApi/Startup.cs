@@ -20,11 +20,11 @@ using TransportMastersGameApi.Middleware;
 using TransportMastersGameApi.Services;
 using TransportMastersGameApi.Models;
 using FluentValidation;
-using FirstStepsDotNet.Models.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using TransportMastersGameApi.Authorization;
 using Microsoft.EntityFrameworkCore;
+using TransportMastersGameApi.Models.Validators;
 
 namespace TransportMastersGameApi
 {
@@ -65,7 +65,7 @@ namespace TransportMastersGameApi
 
             services.AddControllers().AddFluentValidation();
             services.AddDbContext<TransportMastersGameDbContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString("TransportMastersGameDBConnection")));
+                (/*options => options.UseSqlServer(Configuration.GetConnectionString("TransportMastersGameDBConnection"))*/);
             services.AddAutoMapper(this.GetType().Assembly);
 
             //Services
@@ -77,6 +77,8 @@ namespace TransportMastersGameApi
             services.AddScoped<IDestinationService, DestinationService>();
             services.AddScoped<IDriverService, DriverService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IImportDataService, ImportDataService>();
+            services.AddScoped<IModerationCommands, ModerationCommandsService>();
 
             //Midlewares
             services.AddScoped<RequestTimeMidleware>(); 
