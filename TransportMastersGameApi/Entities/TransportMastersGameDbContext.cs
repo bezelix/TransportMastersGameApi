@@ -24,6 +24,9 @@ namespace TransportMastersGameApi.Entities
         public DbSet<Country> Country { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<CargoTemplate> CargoTemplate { get; set; }
+        public DbSet<VehicleTemplate> VehicleTemplate { get; set; }
+        public DbSet<FirstName> FirstName { get; set; }
+        public DbSet<LastName> LastName { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,7 +38,7 @@ namespace TransportMastersGameApi.Entities
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseMySql("Server=s119.cyber-folks.pl,3306;Database=daadipmcej_transportmastersgame;User Id=daadipmcej_bezelix;Password=2rmJ(s-f1Ip-)4S!;", new MySqlServerVersion(new Version(10, 3, 29)))
+                .UseMySql("Server=s119.cyber-folks.pl,3306;Database=daadipmcej_transportmastersgame;User Id=daadipmcej_bezelix;Password=2rmJ(s-f1Ip-)4S!;Convert Zero Datetime=True", new MySqlServerVersion(new Version(10, 3, 29)))
                 .UseLoggerFactory(LoggerFactory.Create(b => b
                     .AddConsole()
                     .AddFilter(level => level >= LogLevel.Information)))

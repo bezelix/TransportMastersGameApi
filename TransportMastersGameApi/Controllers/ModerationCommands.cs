@@ -22,7 +22,21 @@ namespace TransportMastersGameApi.Controllers
         //[Authorize(Roles = "Admin,Manager")]
         public ActionResult Post()
         {
-            _moderationCommands.Create();
+            _moderationCommands.CargoCreate();
+            return Ok();
+        }
+        [HttpPost("AddVehicle")]
+        //[Authorize(Roles = "Admin,Manager")]
+        public ActionResult AddVehicleToMarket()
+        {
+            _moderationCommands.AddVehicle();
+            return Ok();
+        }
+        [HttpPost("AddDriver")]
+        //[Authorize(Roles = "Admin,Manager")]
+        public ActionResult AddDriver()
+        {
+            _moderationCommands.AddDriver();
             return Ok();
         }
     }

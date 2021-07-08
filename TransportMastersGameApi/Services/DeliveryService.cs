@@ -43,7 +43,7 @@ namespace TransportMastersGameApi.Services
         {
 
             var delivery = _mapper.Map<Delivery>(dto);
-            delivery.UserId = _userContextService.GetUserId;
+            delivery.User = _userContextService.GetUserId;
             delivery.CreatedByUser = _userContextService.GetUserId;
             delivery.StartTime = DateTime.Now;
             _dbContext.Deliveries.Add(delivery);
@@ -66,7 +66,7 @@ namespace TransportMastersGameApi.Services
                             .Deliveries
                             .FirstOrDefault(d => d.Id == deliveryId);    //(r => r.Id == id) predykata
 
-            if (delivery is null || delivery.UserId != userId)
+            if (delivery is null || delivery.User != userId)
             {
                 throw new NotFoundException("Delivery not found");
             }

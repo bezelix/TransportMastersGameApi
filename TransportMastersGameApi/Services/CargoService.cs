@@ -81,7 +81,7 @@ namespace TransportMastersGameApi.Services
                             .Deliveries
                             .FirstOrDefault(d => d.Id == cargoId);
 
-            if (cargo is null || cargo.UserId != cargoId)
+            if (cargo is null || cargo.User != cargoId)
             {
                 throw new NotFoundException("Delivery not found");
             }

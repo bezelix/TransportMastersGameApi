@@ -7,6 +7,8 @@ namespace TransportMastersGameApi.Services
 {
     public interface IModerationCommands
     {
-        void Create();
+        void CargoCreate();
+        void AddVehicle();
+        void AddDriver();
     }
 }

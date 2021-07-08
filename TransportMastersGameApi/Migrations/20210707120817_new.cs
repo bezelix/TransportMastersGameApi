@@ -4,11 +4,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TransportMastersGameApi.Migrations
 {
-    public partial class new2 : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "CargoTemplate",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Price = table.Column<float>(type: "float", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CargoTemplate", x => x.Id);
+                })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
@@ -163,6 +181,31 @@ namespace TransportMastersGameApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "VehicleTemplate",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ModelNameNumber = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CarManufacturerNumber = table.Column<int>(type: "int", nullable: false),
+                    ManufactureDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Payload = table.Column<float>(type: "float", nullable: false),
+                    Speed = table.Column<float>(type: "float", nullable: false),
+                    StartPrice = table.Column<float>(type: "float", nullable: false),
+                    CarCondition = table.Column<int>(type: "int", nullable: false),
+                    LocalizationN = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LocalizationE = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VehicleTemplate", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Cargos",
                 columns: table => new
                 {
@@ -230,12 +273,13 @@ namespace TransportMastersGameApi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreatedByUser = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    CargoId = table.Column<int>(type: "int", nullable: false),
-                    DriverId = table.Column<int>(type: "int", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: false),
-                    StartLocationId = table.Column<int>(type: "int", nullable: false),
-                    DestinationId = table.Column<int>(type: "int", nullable: false),
+                    CreatedById = table.Column<int>(type: "int", nullable: true),
+                    User = table.Column<int>(type: "int", nullable: true),
+                    Cargo = table.Column<int>(type: "int", nullable: false),
+                    Driver = table.Column<int>(type: "int", nullable: false),
+                    Vehicle = table.Column<int>(type: "int", nullable: false),
+                    StartLocation = table.Column<int>(type: "int", nullable: false),
+                    Destination = table.Column<int>(type: "int", nullable: false),
                     RouteLength = table.Column<float>(type: "float", nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
@@ -243,8 +287,8 @@ namespace TransportMastersGameApi.Migrations
                 {
                     table.PrimaryKey("PK_Deliveries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Deliveries_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Deliveries_Users_CreatedById",
+                        column: x => x.CreatedById,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -257,10 +301,11 @@ namespace TransportMastersGameApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ModelNameId = table.Column<string>(type: "longtext", nullable: true)
+                    ModelNameNumber = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ModelNameId1 = table.Column<int>(type: "int", nullable: true),
-                    CarManufacturerId = table.Column<int>(type: "int", nullable: false),
+                    ModelNameId = table.Column<int>(type: "int", nullable: true),
+                    CarManufacturerNumber = table.Column<int>(type: "int", nullable: false),
+                    CarManufacturerId = table.Column<int>(type: "int", nullable: true),
                     ManufactureDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Payload = table.Column<float>(type: "float", nullable: false),
                     Speed = table.Column<float>(type: "float", nullable: false),
@@ -270,8 +315,9 @@ namespace TransportMastersGameApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LocalizationE = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DriverId = table.Column<int>(type: "int", nullable: false),
-                    CargoId = table.Column<int>(type: "int", nullable: false),
+                    Driver = table.Column<int>(type: "int", nullable: false),
+                    CargNumber = table.Column<int>(type: "int", nullable: false),
+                    CargoId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -282,16 +328,16 @@ namespace TransportMastersGameApi.Migrations
                         column: x => x.CargoId,
                         principalTable: "Cargos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Vehicles_CarManufacturers_CarManufacturerId",
                         column: x => x.CarManufacturerId,
                         principalTable: "CarManufacturers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Vehicles_ModelNames_ModelNameId1",
-                        column: x => x.ModelNameId1,
+                        name: "FK_Vehicles_ModelNames_ModelNameId",
+                        column: x => x.ModelNameId,
                         principalTable: "ModelNames",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -310,7 +356,7 @@ namespace TransportMastersGameApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    User = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LastName = table.Column<string>(type: "longtext", nullable: true)
@@ -319,11 +365,12 @@ namespace TransportMastersGameApi.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Nationality = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    VehicleId = table.Column<int>(type: "int", nullable: false),
-                    VehicleId1 = table.Column<int>(type: "int", nullable: true),
+                    VehicleNumber = table.Column<int>(type: "int", nullable: false),
+                    VehicleId = table.Column<int>(type: "int", nullable: true),
                     HoursAtWork = table.Column<float>(type: "float", nullable: false),
                     MaxHoursAtWork = table.Column<float>(type: "float", nullable: false),
-                    Payment = table.Column<float>(type: "float", nullable: false)
+                    Payment = table.Column<float>(type: "float", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -333,10 +380,10 @@ namespace TransportMastersGameApi.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Drivers_Vehicles_VehicleId1",
-                        column: x => x.VehicleId1,
+                        name: "FK_Drivers_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -349,9 +396,9 @@ namespace TransportMastersGameApi.Migrations
                 column: "DestinationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Deliveries_UserId",
+                name: "IX_Deliveries_CreatedById",
                 table: "Deliveries",
-                column: "UserId");
+                column: "CreatedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Drivers_UserId",
@@ -359,9 +406,9 @@ namespace TransportMastersGameApi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Drivers_VehicleId1",
+                name: "IX_Drivers_VehicleId",
                 table: "Drivers",
-                column: "VehicleId1");
+                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
@@ -379,9 +426,9 @@ namespace TransportMastersGameApi.Migrations
                 column: "CarManufacturerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_ModelNameId1",
+                name: "IX_Vehicles_ModelNameId",
                 table: "Vehicles",
-                column: "ModelNameId1");
+                column: "ModelNameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_UserId",
@@ -391,6 +438,9 @@ namespace TransportMastersGameApi.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CargoTemplate");
+
             migrationBuilder.DropTable(
                 name: "CargoTypes");
 
@@ -411,6 +461,9 @@ namespace TransportMastersGameApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "State");
+
+            migrationBuilder.DropTable(
+                name: "VehicleTemplate");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");

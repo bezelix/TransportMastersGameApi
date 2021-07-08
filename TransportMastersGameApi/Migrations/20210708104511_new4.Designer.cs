@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransportMastersGameApi.Entities;
 
 namespace TransportMastersGameApi.Migrations
 {
     [DbContext(typeof(TransportMastersGameDbContext))]
-    partial class TransportMastersGameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210708104511_new4")]
+    partial class new4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,34 +281,6 @@ namespace TransportMastersGameApi.Migrations
                     b.ToTable("Drivers");
                 });
 
-            modelBuilder.Entity("TransportMastersGameApi.Entities.FirstName", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstNameValue")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("FirstName");
-                });
-
-            modelBuilder.Entity("TransportMastersGameApi.Entities.LastName", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastNameValue")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LastName");
-                });
-
             modelBuilder.Entity("TransportMastersGameApi.Entities.ModelName", b =>
                 {
                     b.Property<int>("Id")
@@ -420,11 +394,11 @@ namespace TransportMastersGameApi.Migrations
                     b.Property<int>("Driver")
                         .HasColumnType("int");
 
-                    b.Property<double>("Lat")
-                        .HasColumnType("double");
+                    b.Property<string>("LocalizationE")
+                        .HasColumnType("longtext");
 
-                    b.Property<double>("Lon")
-                        .HasColumnType("double");
+                    b.Property<string>("LocalizationN")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ManufactureDate")
                         .HasColumnType("longtext");

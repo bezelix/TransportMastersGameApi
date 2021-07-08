@@ -9,8 +9,8 @@ using TransportMastersGameApi.Entities;
 namespace TransportMastersGameApi.Migrations
 {
     [DbContext(typeof(TransportMastersGameDbContext))]
-    [Migration("20210706125535_new2")]
-    partial class new2
+    [Migration("20210708093815_new3")]
+    partial class new3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,6 +87,26 @@ namespace TransportMastersGameApi.Migrations
                     b.ToTable("Sizes");
                 });
 
+            modelBuilder.Entity("TransportMastersGameApi.Entities.CargoTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<float?>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CargoTemplate");
+                });
+
             modelBuilder.Entity("TransportMastersGameApi.Entities.CargoType", b =>
                 {
                     b.Property<int>("Id")
@@ -141,36 +161,39 @@ namespace TransportMastersGameApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CargoId")
+                    b.Property<int>("Cargo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
                     b.Property<int?>("CreatedByUser")
                         .HasColumnType("int");
 
-                    b.Property<int>("DestinationId")
+                    b.Property<int>("Destination")
                         .HasColumnType("int");
 
-                    b.Property<int>("DriverId")
+                    b.Property<int>("Driver")
                         .HasColumnType("int");
 
                     b.Property<float>("RouteLength")
                         .HasColumnType("float");
 
-                    b.Property<int>("StartLocationId")
+                    b.Property<int>("StartLocation")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int?>("User")
                         .HasColumnType("int");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int>("Vehicle")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CreatedById");
 
                     b.ToTable("Deliveries");
                 });
@@ -237,20 +260,23 @@ namespace TransportMastersGameApi.Migrations
                     b.Property<float>("Payment")
                         .HasColumnType("float");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("User")
                         .HasColumnType("int");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VehicleId1")
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehicleNumber")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("VehicleId1");
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Drivers");
                 });
@@ -353,13 +379,19 @@ namespace TransportMastersGameApi.Migrations
                     b.Property<int>("CarCondition")
                         .HasColumnType("int");
 
-                    b.Property<int>("CarManufacturerId")
+                    b.Property<int?>("CarManufacturerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CargoId")
+                    b.Property<int>("CarManufacturerNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("DriverId")
+                    b.Property<int>("CargNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CargoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Driver")
                         .HasColumnType("int");
 
                     b.Property<string>("LocalizationE")
@@ -368,14 +400,17 @@ namespace TransportMastersGameApi.Migrations
                     b.Property<string>("LocalizationN")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("ManufactureDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("ModelNameId")
+                    b.Property<string>("ManufactureDate")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ModelNameId1")
+                    b.Property<int?>("ModelNameId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ModelNameNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("OnMarket")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<float>("Payload")
                         .HasColumnType("float");
@@ -395,11 +430,52 @@ namespace TransportMastersGameApi.Migrations
 
                     b.HasIndex("CargoId");
 
-                    b.HasIndex("ModelNameId1");
+                    b.HasIndex("ModelNameId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Vehicles");
+                });
+
+            modelBuilder.Entity("TransportMastersGameApi.Entities.VehicleTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarCondition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarManufacturerNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocalizationE")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LocalizationN")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ManufactureDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModelNameNumber")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("OnMarket")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<float>("Payload")
+                        .HasColumnType("float");
+
+                    b.Property<float>("Speed")
+                        .HasColumnType("float");
+
+                    b.Property<float>("StartPrice")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VehicleTemplate");
                 });
 
             modelBuilder.Entity("TransportMastersGameApi.Entities.Cargo", b =>
@@ -413,7 +489,7 @@ namespace TransportMastersGameApi.Migrations
                 {
                     b.HasOne("TransportMastersGameApi.Entities.User", "CreatedBy")
                         .WithMany("Deliveries")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("CreatedById");
 
                     b.Navigation("CreatedBy");
                 });
@@ -422,13 +498,11 @@ namespace TransportMastersGameApi.Migrations
                 {
                     b.HasOne("TransportMastersGameApi.Entities.User", null)
                         .WithMany("Drivers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.HasOne("TransportMastersGameApi.Entities.Vehicle", "Vehicle")
                         .WithMany()
-                        .HasForeignKey("VehicleId1");
+                        .HasForeignKey("VehicleId");
 
                     b.Navigation("Vehicle");
                 });
@@ -446,19 +520,15 @@ namespace TransportMastersGameApi.Migrations
                 {
                     b.HasOne("TransportMastersGameApi.Entities.CarManufacturer", "CarManufacturer")
                         .WithMany()
-                        .HasForeignKey("CarManufacturerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CarManufacturerId");
 
                     b.HasOne("TransportMastersGameApi.Entities.Cargo", "Cargo")
                         .WithMany()
-                        .HasForeignKey("CargoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CargoId");
 
                     b.HasOne("TransportMastersGameApi.Entities.ModelName", "ModelName")
                         .WithMany()
-                        .HasForeignKey("ModelNameId1");
+                        .HasForeignKey("ModelNameId");
 
                     b.HasOne("TransportMastersGameApi.Entities.User", null)
                         .WithMany("Vehicles")
