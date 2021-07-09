@@ -8,6 +8,7 @@ namespace TransportMastersGameApi.Models
 {
     public class VehicleDto
     {
+        public int Id { get; set; }
         public string ModelNameId { get; set; }
         public int CarManufacturerId { get; set; }
         public DateTime ManufactureDate { get; set; }
