@@ -33,6 +33,14 @@ namespace TransportMastersGameApi.Controllers
             string token = _AccountService.GenerateJwt(dto);
             return Ok(token);
         }
+        [HttpGet("GetUserByEmail/{_email}")]
+
+        public ActionResult<UserSimpleDataDto> GetUserByEmail([FromRoute] string _email)
+        {
+            UserSimpleDataDto _userSimpleDataDto = _AccountService.GetUserByEmail(_email);
+            return Ok(_userSimpleDataDto);
+        }
+
         //[HttpPost("role")]
 
         //public ActionResult AddRole([FromRoute] string role)

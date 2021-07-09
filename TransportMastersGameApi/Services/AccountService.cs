@@ -57,7 +57,7 @@ namespace TransportMastersGameApi.Services
         public string GenerateJwt(LoginDto dto)
         {
             var user = _dbContext.Users
-                .Include(u => u.Role) 
+                .Include(u => u.Role)
                 .FirstOrDefault(u => u.Email == dto.Email);
             if (user is null)
             {
@@ -104,6 +104,20 @@ namespace TransportMastersGameApi.Services
             _dbContext.Roles.Add(_role);
             _dbContext.SaveChanges();
             return Role;
+        }
+
+        public UserSimpleDataDto GetUserByEmail(string email)
+        {
+            var user = _dbContext
+                            .Users
+                            .FirstOrDefault(d => d.Email == email);
+
+            if (user is null || user.Email != email)
+            {
+                throw new NotFoundException("User not found");
+            }
+            var _userSimpleDataDto = _mapper.Map<UserSimpleDataDto>(user);
+            return _userSimpleDataDto;
         }
     }
 }
