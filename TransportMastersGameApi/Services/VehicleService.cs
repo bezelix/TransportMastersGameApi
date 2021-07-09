@@ -45,6 +45,14 @@ namespace TransportMastersGameApi.Services
             _dbContext.SaveChanges();
         }
 
+        public List<Vehicle> GetAllOnMarketplace()
+        {
+            var vehicle = _dbContext
+                            .Vehicles
+                            .Where(item => item.OnMarket==true).ToList();
+            return vehicle;
+        }
+
         public object GetAllVehicle()
         {
             var vehicle = _dbContext

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TransportMastersGameApi.Entities;
 using TransportMastersGameApi.Models;
 using TransportMastersGameApi.Services;
 
@@ -42,6 +43,12 @@ namespace TransportMastersGameApi.Controllers
         {
             var vehicle = _VehicleService.GetAllVehicle();
             return Ok(vehicle);
+        }
+        [HttpGet("marketplace/vehicle")]
+        public ActionResult<List<Vehicle>> GetAllOnMarketplace()
+        {
+            List<Vehicle> vehicles = _VehicleService.GetAllOnMarketplace();
+            return Ok(vehicles);
         }
 
         [HttpDelete("{vehicleId}")]
