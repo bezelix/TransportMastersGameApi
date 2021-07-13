@@ -13,6 +13,6 @@ namespace TransportMastersGameApi.Services
         void Delete(int vehicleId);
         VehicleDto GetById(int vehicleId);
         object GetAllVehicle();
-        List<Vehicle> GetAllOnMarketplace();
+        List<VehicleDto> GetAllOnMarketplace();
     }
 }

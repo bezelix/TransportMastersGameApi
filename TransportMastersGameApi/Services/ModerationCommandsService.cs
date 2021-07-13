@@ -128,6 +128,7 @@ namespace TransportMastersGameApi.Services
                 vehicle.Lat = _startLocalization.Lat;
                 vehicle.Lon = _startLocalization.Lon;
                 vehicle.OnMarket = true;
+                
 
                 _dbContext.Vehicles.Add(vehicle);
                 _dbContext.SaveChanges();

@@ -9,17 +9,21 @@ namespace TransportMastersGameApi.Models
     public class VehicleDto
     {
         public int Id { get; set; }
-        public string ModelNameId { get; set; }
-        public int CarManufacturerId { get; set; }
+        public int VehicleMileage { get; set; }
+        public int ModelNameNumber { get; set; }
+        public string ModelName { get; set; }
+        public int CarManufacturerNumber { get; set; }
+        public string CarManufacturer { get; set; }
         public DateTime ManufactureDate { get; set; }
         public float Payload { get; set; }
         public float Speed { get; set; }
         public float StartPrice { get; set; }
         public int CarCondition { get; set; }
-        public string LocalizationN { get; set; }
-        public string LocalizationE { get; set; }
-        public int DriverId { get; set; }
-        public int CargoId { get; set; }
-        public virtual Cargo Cargo { get; set; }
+        public double Lat { get; set; }
+        public double Lon { get; set; }
+        public int Driver { get; set; }
+        public int CargNumber { get; set; }
+        public bool OnMarket { get; set; }
+        public DateTime OfferStartTime { get; set; }
     }
 }

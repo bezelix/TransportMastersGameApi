@@ -12,7 +12,7 @@ namespace TransportMastersGameApi.Controllers
 {
     [Route("api/vehicle")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class VehicleController : ControllerBase
     {
         private IVehicleService _VehicleService;
@@ -47,7 +47,7 @@ namespace TransportMastersGameApi.Controllers
         [HttpGet("marketplace/vehicle")]
         public ActionResult<List<Vehicle>> GetAllOnMarketplace()
         {
-            List<Vehicle> vehicles = _VehicleService.GetAllOnMarketplace();
+            List<VehicleDto> vehicles = _VehicleService.GetAllOnMarketplace();
             return Ok(vehicles);
         }
 

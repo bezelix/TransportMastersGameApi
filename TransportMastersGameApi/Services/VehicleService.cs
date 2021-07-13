@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FirstStepsDotNet.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,23 @@ namespace TransportMastersGameApi.Services
             _dbContext.SaveChanges();
         }
 
-        public List<Vehicle> GetAllOnMarketplace()
+        public List<VehicleDto> GetAllOnMarketplace()
         {
             var vehicle = _dbContext
                             .Vehicles
                             .Where(item => item.OnMarket==true).ToList();
-            return vehicle;
+            var vehicleDtos = _mapper.Map<List<VehicleDto>>(vehicle);
+            foreach (var item in vehicleDtos)
+            {
+                item.ModelName = _dbContext
+                             .ModelNames
+                             .FirstOrDefault(r => r.Id == item.ModelNameNumber).Name;
+                item.CarManufacturer = _dbContext
+                             .CarManufacturers
+                             .FirstOrDefault(r => r.Id == item.CarManufacturerNumber).Name;
+                item.OfferStartTime= DateTime.Now;
+            }
+            return vehicleDtos;
         }
 
         public object GetAllVehicle()

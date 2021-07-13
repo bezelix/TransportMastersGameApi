@@ -24,5 +24,6 @@ namespace TransportMastersGameApi.Entities
         public int CargNumber { get; set; }
         public virtual Cargo Cargo { get; set; }
         public bool OnMarket { get; set; }
+        public DateTime OfferStartTime { get; set; }
     }
 }
