@@ -24,14 +24,16 @@ namespace TransportMastersGameApi.Services
         private readonly ILogger<AccountService> _logger;
         private readonly IPasswordHasher<User> _passwordHasher;
         private AuthenticationSettings _authenticationSettings;
+        private IMarketplaceService _marketplaceService;
 
-        public AccountService(TransportMastersGameDbContext dbContext, IMapper mapper, ILogger<AccountService> logger, IPasswordHasher<User> passwordHasher, AuthenticationSettings authenticationSettings)
+        public AccountService(TransportMastersGameDbContext dbContext, IMapper mapper, ILogger<AccountService> logger, IPasswordHasher<User> passwordHasher, AuthenticationSettings authenticationSettings, IMarketplaceService marketplaceService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
             _passwordHasher = passwordHasher;
             _authenticationSettings = authenticationSettings;
+            _marketplaceService = marketplaceService;
         }
 
         public void RegisterUser(RegisterUserDto dto)
@@ -118,6 +120,24 @@ namespace TransportMastersGameApi.Services
             }
             var _userSimpleDataDto = _mapper.Map<UserSimpleDataDto>(user);
             return _userSimpleDataDto;
+        }
+        public long GetUserTotalAccountBalance(int userId)
+        {
+            var user = _dbContext
+                            .Users
+                            .FirstOrDefault(r => r.Id == userId);
+
+            long _accountBalance = user.AccountBalance;
+
+            foreach (var item in _marketplaceService.GetAllBid())
+            {
+                if (item.UserIdentyficator == userId)
+                {
+                    _accountBalance =+ item.BidValue;
+                }
+            };
+
+            return _accountBalance;
         }
     }
 }

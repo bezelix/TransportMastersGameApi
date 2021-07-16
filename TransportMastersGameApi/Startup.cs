@@ -79,6 +79,7 @@ namespace TransportMastersGameApi
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IImportDataService, ImportDataService>();
             services.AddScoped<IModerationCommands, ModerationCommandsService>();
+            services.AddScoped<IMarketplaceService, MarketplaceService>();
 
             //Midlewares
             services.AddScoped<RequestTimeMidleware>(); 

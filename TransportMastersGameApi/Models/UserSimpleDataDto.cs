@@ -11,7 +11,7 @@ namespace TransportMastersGameApi.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Nationality { get; set; }
-        public int AccountBalance { get; set; }
+        public long AccountBalance { get; set; }
         public int Level { get; set; }
         public int PremiumPoints { get; set; }
     }

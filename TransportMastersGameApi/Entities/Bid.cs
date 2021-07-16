@@ -10,7 +10,10 @@ namespace TransportMastersGameApi.Entities
         public int id { get; set; }
         public int UserIdentyficator { get; set; }
         public int VehicleIdentyficator { get; set; }
-        public int BidValue { get; set; }
+        public long BidValue { get; set; }
+        public bool Active { get; set; }
         public DateTime Date { get; set; }
+
+
     }
 }

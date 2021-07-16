@@ -18,7 +18,7 @@ namespace TransportMastersGameApi.Entities
         public string PasswordHash { get; set; }
         public int RoleNumber { get; set; } 
         public virtual Role Role { get; set; }
-        public float? AccountBalance { get; set; }
+        public long AccountBalance { get; set; }
         public virtual List<Driver> Drivers { get; set; }
         public virtual List<Vehicle> Vehicles { get; set; }
         public virtual List<Delivery> Deliveries { get; set; }

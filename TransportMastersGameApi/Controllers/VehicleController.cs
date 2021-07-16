@@ -58,6 +58,6 @@ namespace TransportMastersGameApi.Controllers
             _VehicleService.Delete(vehicleId);
             return NoContent();
         }
-
+        
     }
 }
