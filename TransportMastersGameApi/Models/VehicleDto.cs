@@ -25,5 +25,6 @@ namespace TransportMastersGameApi.Models
         public int CargNumber { get; set; }
         public bool OnMarket { get; set; }
         public DateTime OfferStartTime { get; set; }
+        public DateTime OfferEndTime { get; set; }
     }
 }

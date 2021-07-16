@@ -27,6 +27,7 @@ namespace TransportMastersGameApi.Entities
         public DbSet<VehicleTemplate> VehicleTemplate { get; set; }
         public DbSet<FirstName> FirstName { get; set; }
         public DbSet<LastName> LastName { get; set; }
+        public DbSet<Bid> Bids { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

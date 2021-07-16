@@ -2,43 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransportMastersGameApi.Entities;
 
 namespace TransportMastersGameApi.Migrations
 {
     [DbContext(typeof(TransportMastersGameDbContext))]
-    partial class TransportMastersGameDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210714181250_ad4342")]
+    partial class ad4342
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.7");
-
-            modelBuilder.Entity("TransportMastersGameApi.Entities.Bid", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("BidValue")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("UserIdentyficator")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VehicleIdentyficator")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Bids");
-                });
 
             modelBuilder.Entity("TransportMastersGameApi.Entities.CarManufacturer", b =>
                 {

@@ -60,7 +60,8 @@ namespace TransportMastersGameApi.Services
                 item.CarManufacturer = _dbContext
                              .CarManufacturers
                              .FirstOrDefault(r => r.Id == item.CarManufacturerNumber).Name;
-                item.OfferStartTime= DateTime.Now;
+                
+                item.OfferEndTime = item.OfferStartTime.AddHours(24);
             }
             return vehicleDtos;
         }
