@@ -40,6 +40,13 @@ namespace TransportMastersGameApi.Controllers
             UserSimpleDataDto _userSimpleDataDto = _AccountService.GetUserByEmail(_email);
             return Ok(_userSimpleDataDto);
         }
+        [HttpGet("GetUserTotalAccountBalance/{_userId}")]
+
+        public ActionResult<long> GetUserTotalAccountBalance([FromRoute] int _userId)
+        {
+            long _totalAccountBalance = _AccountService.GetUserTotalAccountBalance(_userId);
+            return Ok(_totalAccountBalance);
+        }
 
         //[HttpPost("role")]
 

@@ -31,13 +31,19 @@ namespace TransportMastersGameApi.Controllers
             {
                 throw new BadRequestExceprion("Not enough money");
             }
-            
         }
         [HttpGet("getBidByVehicleId/{_vehicleId}")]
 
         public ActionResult<List<Bid>> GetUserByEmail([FromRoute] int _vehicleId)
         {
-            List<Bid> _bid = _marketplaceService.GetBidByVehicleId(_vehicleId);
+            List<Bid> _bid = _marketplaceService.GetAllBidByVehicleId(_vehicleId);
+            return Ok(_bid);
+        }
+        [HttpGet("getHighestBidByVehicleId/{_vehicleId}")]
+
+        public ActionResult<Bid> GetHighestBidByVehicleId([FromRoute] int _vehicleId)
+        {
+            Bid _bid = _marketplaceService.GetHighestBidByVehicleId(_vehicleId);
             return Ok(_bid);
         }
     }

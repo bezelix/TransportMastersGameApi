@@ -12,5 +12,6 @@ namespace TransportMastersGameApi.Services
         string GenerateJwt(LoginDto dto);
         string AddRole(string Role);
         UserSimpleDataDto GetUserByEmail(string email);
+        long GetUserTotalAccountBalance(int userId);
     }
 }

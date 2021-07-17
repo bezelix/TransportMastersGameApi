@@ -9,7 +9,8 @@ namespace TransportMastersGameApi.Services
     public interface IMarketplaceService
     {
         bool AddBid(Bid bidObject);
-        List<Bid> GetBidByVehicleId(int vehicleId);
-        List<Bid> GetAllBid();
+        List<Bid> GetAllBidByVehicleId(int vehicleId);
+        List<Bid> GetAllActiveBid();
+        Bid GetHighestBidByVehicleId(int vehicleId);
     }
 }

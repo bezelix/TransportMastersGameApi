@@ -118,6 +118,7 @@ namespace TransportMastersGameApi.Services
             {
                 throw new NotFoundException("User not found");
             }
+            user.AccountBalance = GetUserTotalAccountBalance(user.Id);
             var _userSimpleDataDto = _mapper.Map<UserSimpleDataDto>(user);
             return _userSimpleDataDto;
         }
@@ -129,11 +130,11 @@ namespace TransportMastersGameApi.Services
 
             long _accountBalance = user.AccountBalance;
 
-            foreach (var item in _marketplaceService.GetAllBid())
+            foreach (var item in _marketplaceService.GetAllActiveBid())
             {
                 if (item.UserIdentyficator == userId)
                 {
-                    _accountBalance =+ item.BidValue;
+                    _accountBalance = _accountBalance - item.BidValue;
                 }
             };
 

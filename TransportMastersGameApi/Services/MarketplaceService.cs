@@ -24,24 +24,30 @@ namespace TransportMastersGameApi.Services
 
         public bool AddBid(Bid bidObject)
         {
-
-            var _user = GetUserById(bidObject.UserIdentyficator);
-            bool _highestBid=false;
-
-            foreach (var item in GetBidByVehicleId(bidObject.VehicleIdentyficator))
+            bool _highestBid = false;
+            if (GetAllBidByVehicleId(bidObject.VehicleIdentyficator).Count > 0)
             {
-                if (item.BidValue >= bidObject.BidValue)
+                foreach (var item in GetAllBidByVehicleId(bidObject.VehicleIdentyficator))
                 {
-                    _highestBid = false;
-                }
-                else
-                {
-                    _highestBid = true;
-                }
 
+                    if (item.BidValue > bidObject.BidValue)
+                    {
+                        _highestBid = false;
+                    }
+                    else
+                    {
+                        if(item.UserIdentyficator!= bidObject.UserIdentyficator)
+                        {
+                            _highestBid = true;
+                        }
+                    }
+                }
             }
-
-            if (_user.AccountBalance >= bidObject.BidValue && _highestBid)
+            else
+            {
+                _highestBid = true;
+            }
+            if (GetUserTotalAccountBalance(bidObject.UserIdentyficator) > bidObject.BidValue && _highestBid)
             {
                 _dbContext.Bids.Add(bidObject);
                 _dbContext.SaveChanges();
@@ -53,14 +59,14 @@ namespace TransportMastersGameApi.Services
             }
         }
 
-        public List<Bid> GetBidByVehicleId(int vehicleId)
+        public List<Bid> GetAllBidByVehicleId(int vehicleId)
         {
             var bids = _dbContext
                             .Bids
                             .Where(r => r.VehicleIdentyficator == vehicleId).ToList();
             return bids;
         }
-        public List<Bid> GetAllBid()
+        public List<Bid> GetAllActiveBid()
         {
             var bids = _dbContext
                             .Bids
@@ -78,6 +84,38 @@ namespace TransportMastersGameApi.Services
                 throw new NotFoundException("User not found");
             return user;
         }
+
+        private long GetUserTotalAccountBalance(int userId)
+        {
+            var user = _dbContext
+                            .Users
+                            .FirstOrDefault(r => r.Id == userId);
+
+            long _accountBalance = user.AccountBalance;
+
+            foreach (var item in GetAllActiveBid())
+            {
+                if (item.UserIdentyficator == userId)
+                {
+                    _accountBalance = _accountBalance - item.BidValue;
+                }
+            };
+
+            return _accountBalance;
+        }
+
+        public Bid GetHighestBidByVehicleId(int vehicleId)
+        {
+            var bid = _dbContext
+                            .Bids
+                            .Where(r => r.VehicleIdentyficator == vehicleId)
+                            .Where(r=> r.Active == true)
+                            .OrderByDescending(r => r.BidValue).ToList();
+
+            return bid[0];
+
+        }
+
         //void AccountBalanceUpdate(int id, long value)
         //{
         //    var user = _dbContext
