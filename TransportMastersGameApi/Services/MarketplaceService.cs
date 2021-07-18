@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TransportMastersGameApi.Entities;
+using TransportMastersGameApi.Models;
 
 namespace TransportMastersGameApi.Services
 {
@@ -14,17 +15,29 @@ namespace TransportMastersGameApi.Services
         private TransportMastersGameDbContext _dbContext;
         private IMapper _mapper;
         private ILogger<DriverService> _logger;
+        private IVehicleService _vehicleService;
 
-        public MarketplaceService(TransportMastersGameDbContext dbContext, IMapper mapper, ILogger<DriverService> logger)
+        public MarketplaceService(TransportMastersGameDbContext dbContext, IMapper mapper, ILogger<DriverService> logger, IVehicleService vehicleService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _vehicleService = vehicleService;
         }
 
         public bool AddBid(Bid bidObject)
         {
             bool _highestBid = false;
+            bool _correctTime = false;
+
+            VehicleDto _vehicleDto = _vehicleService.GetAllOnMarketplace().Find(item => item.Id == bidObject.VehicleIdentyficator);
+
+            if (_vehicleDto.OfferStartTime.AddHours(24) < DateTime.Now)
+            {
+                _correctTime = false;
+                throw new BadRequestExceprion("Time's up");
+            }
+            else { _correctTime = true; }
             if (GetAllBidByVehicleId(bidObject.VehicleIdentyficator).Count > 0)
             {
                 foreach (var item in GetAllBidByVehicleId(bidObject.VehicleIdentyficator))
@@ -32,11 +45,13 @@ namespace TransportMastersGameApi.Services
 
                     if (item.BidValue > bidObject.BidValue)
                     {
+
                         _highestBid = false;
+                        throw new BadRequestExceprion("Your bid is too low");
                     }
                     else
                     {
-                        if(item.UserIdentyficator!= bidObject.UserIdentyficator)
+                        if (item.UserIdentyficator != bidObject.UserIdentyficator)
                         {
                             _highestBid = true;
                         }
@@ -47,7 +62,7 @@ namespace TransportMastersGameApi.Services
             {
                 _highestBid = true;
             }
-            if (GetUserTotalAccountBalance(bidObject.UserIdentyficator) > bidObject.BidValue && _highestBid)
+            if (GetUserTotalAccountBalance(bidObject.UserIdentyficator) > bidObject.BidValue && _highestBid && _correctTime)
             {
                 _dbContext.Bids.Add(bidObject);
                 _dbContext.SaveChanges();
@@ -109,7 +124,7 @@ namespace TransportMastersGameApi.Services
             var bid = _dbContext
                             .Bids
                             .Where(r => r.VehicleIdentyficator == vehicleId)
-                            .Where(r=> r.Active == true)
+                            .Where(r => r.Active == true)
                             .OrderByDescending(r => r.BidValue).ToList();
 
             return bid[0];

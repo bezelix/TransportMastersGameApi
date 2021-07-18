@@ -174,5 +174,25 @@ namespace TransportMastersGameApi.Services
                 _dbContext.SaveChanges();
             }
         }
+        
+        public void EverySeccondJob()
+        {
+            for (int i = 0; i <= 12; i++)
+            {
+
+                SaveLog();
+                Task.Delay(5000).Wait();
+            }
+        }
+        private void SaveLog()
+        {
+            MSQLLogs log = new MSQLLogs();
+
+            log.LogInfo = "im working";
+            log.Date = DateTime.Now;
+
+            _dbContext.MSQLLogs.Add(log);
+            _dbContext.SaveChanges();
+        }
     }
 }

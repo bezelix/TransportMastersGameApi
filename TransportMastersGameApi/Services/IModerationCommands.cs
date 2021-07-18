@@ -10,5 +10,6 @@ namespace TransportMastersGameApi.Services
         void CargoCreate();
         void AddVehicle();
         void AddDriver();
+        void EverySeccondJob();
     }
 }

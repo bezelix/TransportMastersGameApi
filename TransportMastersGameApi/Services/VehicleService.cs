@@ -50,8 +50,10 @@ namespace TransportMastersGameApi.Services
         {
             var vehicle = _dbContext
                             .Vehicles
-                            .Where(item => item.OnMarket==true).ToList();
+                            .Where(item => item.OnMarket==true && item.OfferStartTime.AddHours(24) > DateTime.Now)
+                            .ToList();
             var vehicleDtos = _mapper.Map<List<VehicleDto>>(vehicle);
+            
             foreach (var item in vehicleDtos)
             {
                 item.ModelName = _dbContext

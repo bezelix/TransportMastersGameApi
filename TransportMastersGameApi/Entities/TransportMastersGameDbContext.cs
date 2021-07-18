@@ -28,6 +28,7 @@ namespace TransportMastersGameApi.Entities
         public DbSet<FirstName> FirstName { get; set; }
         public DbSet<LastName> LastName { get; set; }
         public DbSet<Bid> Bids { get; set; }
+        public DbSet<MSQLLogs> MSQLLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

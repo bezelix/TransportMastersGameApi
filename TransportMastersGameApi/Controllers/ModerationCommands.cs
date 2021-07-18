@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,13 @@ namespace TransportMastersGameApi.Controllers
         public ActionResult AddDriver()
         {
             _moderationCommands.AddDriver();
+            return Ok();
+        }
+        [HttpGet("EverySeccondJob")]
+        //[Authorize(Roles = "Admin,Manager")]
+        public ActionResult EverySeccondJob()
+        {
+            _moderationCommands.EverySeccondJob();
             return Ok();
         }
     }

@@ -25,6 +25,9 @@ using Microsoft.AspNetCore.Authorization;
 using TransportMastersGameApi.Authorization;
 using Microsoft.EntityFrameworkCore;
 using TransportMastersGameApi.Models.Validators;
+using Quartz;
+using System.Collections.Specialized;
+using Quartz.Impl;
 
 namespace TransportMastersGameApi
 {
@@ -126,5 +129,6 @@ namespace TransportMastersGameApi
                 endpoints.MapControllers();
             });
         }
+        
     }
 }
